@@ -290,22 +290,22 @@
     ## warn on failed updaters
     for(chain in seq_len(obj$nChains)) {
         ntries <- obj$samples * obj$thin
-        if (any(isTRUE(hM$postList[[chain]]$failedUpdates > 0))) {
+        failures <- attr(hM$postList[[chain]], "failedUpdates")
+        if (any(isTRUE(failures > 0)))
+        {
             cat("Failed updaters and their counts in chain ", chain,
                 " (", ntries, " sampling iterations):\n", sep="")
             failures <- hM$postList[[chain]]$failedUpdates
             failures <- failures[failures > 0]
             print(failures)
         }
-        attr(hM$postList[[chain]], "failedUpdates") <-
-            hM$postList[[chain]]$failedUpdates     # save as an attribute
-        hM$postList[[chain]]$failedUpdates <- NULL # remove from postList
     }
     hM$samples = obj$samples
     hM$transient = obj$transient
     hM$thin = obj$thin
     hM$verbose = obj$verbose
     hM$adaptNf = obj$adaptNf
+    hM$initPar = obj$initPar
     if (obj$alignPost){
         for (i in 1:5){
             hM = alignPosterior(hM)
@@ -354,12 +354,23 @@
     X1 = obj$X1
     verbose = obj$verbose
     initPar = obj$initPar
+    ## allow initPar to be a list of separate values for each chain
+    if (is.null(names(initPar)) && length(initPar) == obj$nChains)
+        initPar <- initPar[[chain]]
 
     ## start
-    if(nChains>1)
+    if(nChains > 1)
         cat(sprintf("Computing chain %d\n", chain))
-    set.seed(initSeed[chain])
-    parList = obj$initParList[[chain]]
+    ## if continue from old chain use their RNGstate
+    if (!is.null(Zstate <- attr(initPar, "Zstate")))
+        assign(".Random.seed", Zstate, envir = .GlobalEnv)
+    else
+        set.seed(initSeed[chain])
+
+    parList = computeInitialParameters(hM,initPar)
+
+    if (!is.null(RNGstate <- attr(initPar, "RNGstate")))
+        assign(".Random.seed", RNGstate, envir=.GlobalEnv)
 
     Gamma = parList$Gamma
     V = parList$V
@@ -414,7 +425,8 @@
                        "wRRRPriors", "Eta", "Alpha",
                        "invSigma", "Z", "Nf", "LatentLoadingOrder")
 ###--> Iterations starts here <--
-    for(iter in seq_len(transient + samples*thin)) {
+    Niterations <- transient + samples*thin
+    for(iter in seq_len(Niterations)) {
         if(!identical(updater$Gamma2, FALSE)) {
             out = try(updateGamma2(Z=Z,Gamma=Gamma,iV=iV,iSigma=iSigma,
                                    Eta=Eta,Lambda=Lambda, X=X,Pi=Pi,
@@ -567,7 +579,8 @@
             iSigma <- out
         else if (iter > transient)
             failed["invSigma"] <- failed["invSigma"] + 1
-
+        if (iter == Niterations)
+            Zstate <- get(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
         if(!identical(updater$Z, FALSE)) {
             out = try(updateZ(Y=Y,Z=Z,Beta=Beta,iSigma=iSigma,Eta=Eta,
                               Lambda=Lambda, X=X,Pi=Pi,dfPi=dfPi,distr=distr,
@@ -639,7 +652,6 @@
                                   TrInterceptInd=hM$TrInterceptInd,
                                   rhopw=rhopw)
         }
-        postList$failedUpdates <- failed
         if((verbose > 0) && (iter%%verbose == 0)){
             if(iter > transient){
                 samplingStatusString = "sampling"
@@ -650,7 +662,13 @@
                         chain, iter, transient+samples*thin,
                         samplingStatusString) )
         }
+        if (iter == Niterations)
+            RNGstate <- get(".Random.seed", envir=.GlobalEnv,
+                            inherits = FALSE)
     }
-### Iterations stop here: return
+### Iterations stop here: set attributes & return
+    attr(postList, "failedUpdates") <- failed
+    attr(postList, "RNGstate") <- RNGstate
+    attr(postList, "Zstate") <- Zstate
     postList
 }

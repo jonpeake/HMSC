@@ -22,7 +22,11 @@ alignPosterior=function(hM){
    ncRRR = hM$ncRRR
    ncNRRR = hM$ncNRRR
    nr = hM$nr
-
+   ## get mirror
+   mirror <- lapply(hM$postList, attr, which = "alignment")
+   if (is.null(mirror[[1]]))
+       for(i in seq_along(mirror))
+           mirror[[i]] <- vector("list", nr)
    for(r in seq_len(nr)){
       nfVec = unlist(lapply(hM$postList, function(postChain) dim(postChain[[1]][["Lambda"]][[r]])[1]))
       nfMax = max(nfVec)
@@ -81,10 +85,14 @@ alignPosterior=function(hM){
             }
          }
          hM$postList[[cInd]] = cpL
+         mirror[[cInd]][[r]] <- if (is.null(mirror[[cInd]][[r]]))
+                                    s
+                                else
+                                    s * mirror[[cInd]][[r]]
       }
    }
    if(ncRRR>0){
-      for (i in 1:length(hM$postList)){
+     for (i in 1:length(hM$postList)){
          cpL= hM$postList[[i]]
          valList=lapply(cpL, function(a) a[["wRRR"]])
          if (i==1){
@@ -107,7 +115,12 @@ alignPosterior=function(hM){
             }
          }
          hM$postList[[i]] = cpL
+         RRRmirror <- attr(hM$postList, "RRRalignment")
+         attr(hM$postList[[i]], "RRRalignment") <-
+             if (is.null(RRRmirror)) s else s * RRRmirror
       }
    }
+   for (i in seq_along(hM$postList))
+       attr(hM$postList[[i]], "alignment") <- mirror[[i]]
    return(hM)
 }
