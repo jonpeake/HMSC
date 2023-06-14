@@ -82,10 +82,14 @@ alignPosterior=function(hM){
                cpL[[j]]$Eta[[r]] = abind(cpL[[j]]$Eta[[r]], matrix(0,nrow(cpL[[j]]$Eta[[r]]),nfMax-nf), along=2)
                if(hM$rL[[r]]$sDim > 0) {
                   cpL[[j]]$Alpha[[r]] = abind(cpL[[j]]$Alpha[[r]], rep(1,nfMax-nf), along=1)
-                  s = rbind(s,array(0,c(nfMax-nf,length(cpL))))
                }
             }
          }
+
+         if (nf < nfMax) {
+            s = rbind(s, array(0, c(nfMax - nf, length(cpL))))
+         }
+                                           
          hM$postList[[cInd]] = cpL
          mirror[[cInd]][[r]] <- if (is.null(mirror[[cInd]][[r]]))
                                     s
