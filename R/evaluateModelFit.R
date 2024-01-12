@@ -65,7 +65,8 @@ evaluateModelFit = function(hM, predY){
       ns = dim(Y)[2]
       R2 = rep(NA,ns)
       for (i in 1:ns){
-         co = cor(Y[,i], predY[,i], method=method, use='pairwise.complete.obs')
+         co = rcorr(Y[,i], predY[,i], type=method)
+         co = co$r
          R2[i] = sign(co)*co^2
       }
       return(R2)
