@@ -47,6 +47,7 @@
 #' @importFrom stats cor median
 #' @importFrom pROC auc
 #' @importFrom abind abind
+#' @importFrom Hmisc rcorr
 #'
 #' @export
 
