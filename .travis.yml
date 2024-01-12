@@ -24,6 +24,7 @@ r_packages:
   - pROC
   - statmod
   - truncnorm
+  - Hmisc
 
 warnings_are_errors: false
 
