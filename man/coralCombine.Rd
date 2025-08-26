@@ -9,9 +9,9 @@ coralCombine(m, muList.coral, VList.coral)
 \arguments{
 \item{m}{fitted \code{Hmsc}-class object}
 
-\item{muList.coral}{arg2}
+\item{muList.coral}{matrix of CORAL posterior means}
 
-\item{VList.coral}{arg3}
+\item{VList.coral}{matrix of CORAL posterior flattened variances}
 }
 \value{
 list with combined means and covariance matrices

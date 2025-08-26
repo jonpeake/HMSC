@@ -27,27 +27,44 @@ coralPlotBeta(
 )
 }
 \arguments{
-\item{mu, V}{coral plot arguments, probably}
+\item{mu}{CORAL-like matrix of means}
 
-\item{phyloTree}{phylogenetic tree}
+\item{V}{CORAL-like matrix of flattened variances}
 
-\item{spNames.common}{species names}
+\item{phyloTree}{phylogenetic tree covering all species}
 
-\item{plotColumns, quantile.support, plotTree}{arguments to plot}
+\item{spNames.common}{species names designated as common in CORAL analysis}
 
-\item{seed}{seed}
+\item{plotColumns}{vector of covariates' indices to be included to the plot}
 
-\item{col.common, alpha.common, jitter.common, cex.common, pch.common}{arguments
-for common species}
+\item{quantile.support}{what lower and upper tails of species coefficients to visualize}
 
-\item{col.rare, alpha.rare, jitter.rare, cex.rare, pch.rare}{arguments for rare
-species}
+\item{plotTree}{proportion of the plot canvas to use for the phylogenetic tree, 0 for no tree}
 
-\item{showCovNames}{show covariate names}
-}
-\value{
-list with combined means and covariance matrices
+\item{seed}{random seed used for jittering}
+
+\item{col.common}{a vector of two color strings indicating lower and upper tails among common species}
+
+\item{alpha.common}{transparency for common species}
+
+\item{jitter.common}{jitter amount for common species}
+
+\item{cex.common}{size of points for common species}
+
+\item{pch.common}{symbol type for common species}
+
+\item{col.rare}{a vector of two color strings indicating lower and upper tails among rare species}
+
+\item{alpha.rare}{transparency for rare species}
+
+\item{jitter.rare}{jitter amount for rare species}
+
+\item{cex.rare}{size of points for rare species}
+
+\item{pch.rare}{symbol type for rare species}
+
+\item{showCovNames}{whether to display covariate names in the plot}
 }
 \description{
-Plots summary of Beta coefficents fitted with CORAL approach
+Plots summary of Beta coefficients fitted with CORAL approach
 }

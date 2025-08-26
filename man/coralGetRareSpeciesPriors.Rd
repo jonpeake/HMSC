@@ -16,19 +16,23 @@ coralGetRareSpeciesPriors(
 \arguments{
 \item{m}{fitted \code{Hmsc}-class object}
 
-\item{spNames.rare}{arg2}
+\item{spNames.rare}{vector of species names that are considered rare}
 
-\item{TrData.rare}{arg3}
+\item{TrData.rare}{dataframe of traits for rare species, if non-trivial traits were used in the backbone Hmsc model}
 
-\item{phyloTree}{arg4}
+\item{phyloTree}{phylogeny tree covering both common and rare species}
 
-\item{C.common.rare}{arg5}
+\item{C.common.rare}{part of phylogeny similarity matrix between common (columns) and rare (rows) species}
 
-\item{interceptVarInflation}{arg6}
+\item{interceptVarInflation}{multiplier for conditional variance prior of intercept term in the CORAL prior,
+compared to phylogeny-induced conditional prior}
 }
 \value{
-A list containing means and covariances of CORAL prior
+A list containing CORAL prior as matrix of means and matrix of flattened covariances
 }
 \description{
 Constructs CORAL priors
+}
+\details{
+The returned CORAL prior components are matrices with rows corresponding to the rare species from the \code{spNames.rare} argument.
 }

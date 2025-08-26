@@ -17,7 +17,7 @@ coralGetXDataExt(m, nf = NULL, varProp = NULL)
 A named list of extended \code{XDataExt} dataframe and corresponding extended \code{XFormulaExt}
 }
 \description{
-constructs extended \code{XData} and \code{XFormula} from fitted \code{Hmsc} for consequent CORAL analysis
+Constructs extended \code{XData} and \code{XFormula} from fitted \code{Hmsc} for consequent CORAL analysis
 }
 \details{
 This functions finds a point estimate of latent factors from fitted \code{m} \code{Hmsc}-class object

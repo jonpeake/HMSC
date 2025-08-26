@@ -7,18 +7,18 @@
 coralPredict(XData, XFormula, mu, V, prob = TRUE)
 }
 \arguments{
-\item{XData}{covariates data.frame}
+\item{XData}{dataframe of covariates for the sampling units to be predicted}
 
-\item{XFormula}{arg2}
+\item{XFormula}{a \code{\link{formula}}-class object for fixed effects}
 
-\item{mu}{arg3}
+\item{mu}{matrix of CORAL prior or posterior means}
 
-\item{V}{arg4}
+\item{V}{matrix of CORAL prior or posterior flattened variances}
 
-\item{prob}{arg5}
+\item{prob}{whether to return predictions as probabilities (TRUE) or latent linear predictor (FALSE)}
 }
 \value{
-Matrix of size ny x ns with CORAL predictions
+Matrix of CORAL predictions with predicted sampling units in the rows and species in the columns
 }
 \description{
 Makes predictions from CORAL models
