@@ -3,8 +3,8 @@
 #' @description Extracts CORAL-like summary from backbone fitted \code{Hmsc}-class object and combines with CORAL models
 #'
 #' @param m fitted \code{Hmsc}-class object
-#' @param muList.coral arg2
-#' @param VList.coral arg3
+#' @param muList.coral matrix of CORAL posterior means
+#' @param VList.coral matrix of CORAL posterior flattened variances
 #'
 #' @return
 #' list with combined means and covariance matrices

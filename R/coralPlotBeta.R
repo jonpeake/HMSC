@@ -1,6 +1,6 @@
 #' @title coralPlotBeta
 #'
-#' @description Plots summary of Beta coefficents fitted with CORAL approach
+#' @description Plots summary of Beta coefficients fitted with CORAL approach
 #'
 ### These arguments were described but not used
 ### NB. Fitted Hmsc object is not among used arguments!
@@ -9,19 +9,25 @@
 ## @param VList.coral arg3
 ### End of unused arguments
 #'
-#' @param mu,V coral plot arguments, probably
-#' @param phyloTree phylogenetic tree
-#' @param spNames.common species names
-#' @param plotColumns,quantile.support,plotTree arguments to plot
-#' @param seed seed
-#' @param col.common,alpha.common,jitter.common,cex.common,pch.common arguments
-#'    for common species
-#' @param col.rare,alpha.rare,jitter.rare,cex.rare,pch.rare arguments for rare
-#'    species
-#' @param showCovNames show covariate names
-
-#' @return
-#' list with combined means and covariance matrices
+#' @param mu CORAL-like matrix of means
+#' @param V CORAL-like matrix of flattened variances
+#' @param phyloTree phylogenetic tree covering all species
+#' @param spNames.common species names designated as common in CORAL analysis
+#' @param plotColumns vector of covariates' indices to be included to the plot
+#' @param quantile.support what lower and upper tails of species coefficients to visualize
+#' @param plotTree proportion of the plot canvas to use for the phylogenetic tree, 0 for no tree
+#' @param seed random seed used for jittering
+#' @param col.common a vector of two color strings indicating lower and upper tails among common species
+#' @param alpha.common transparency for common species
+#' @param jitter.common jitter amount for common species
+#' @param cex.common size of points for common species
+#' @param pch.common symbol type for common species
+#' @param col.rare a vector of two color strings indicating lower and upper tails among rare species
+#' @param alpha.rare transparency for rare species
+#' @param jitter.rare jitter amount for rare species
+#' @param cex.rare size of points for rare species
+#' @param pch.rare symbol type for rare species
+#' @param showCovNames whether to display covariate names in the plot
 #'
 #' @importFrom graphics abline
 #' @importFrom grDevices adjustcolor

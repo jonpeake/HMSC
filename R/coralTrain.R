@@ -3,16 +3,21 @@
 #' @description Trains CORAL models
 #'
 #' @param Y covariates data.frame
-#' @param XData arg2
-#' @param XFormula arg3
-#' @param prior.mu arg4
-#' @param prior.V arg5
-#' @param transient arg6
-#' @param samples arg7
-#' @param thin arg8
+#' @param XData a data frame of measured covariates for fixed effects, same as in the backbone \code{Hmsc(...)} constructor
+#' @param XFormula a \code{\link{formula}}-class object for fixed effects
+#' @param prior.mu matrix of CORAL prior means
+#' @param prior.V matrix of CORAL prior variances
+#' @param transient number of transient MCMC steps
+#' @param samples number of posterior MCMC samples
+#' @param thin thinning interval for MCMC samples
 #'
 #' @return
 #' list with means and covariance matrices of CORAL posteriors
+#'
+#' @details
+#' Arguments \code{transient}, \code{samples} and \code{thin} are passed to the \code{MCMCprobit(...)} call
+#' sequentially made for for each species.
+#'
 #'
 #' @importFrom stats as.formula
 #' @importFrom MCMCpack MCMCprobit
