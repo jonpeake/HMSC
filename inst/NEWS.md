@@ -1,4 +1,18 @@
-Version 3.0-14 (development version in github)
+Version 3.3-1
+===============
+
+### New Features
+
+* Added a set of utilities to facilitate Common to Rare Transfer Learning (CORAL).
+
+Version 3.1-1
+===============
+
+### New Features
+
+* Added integration with Hmsc-HPC add-on for delegating MCMC to TensorFlow.
+
+Version 3.0-14
 ===============
 
 ### New Features
