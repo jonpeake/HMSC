@@ -27,15 +27,44 @@ coralPlotBeta(
 )
 }
 \arguments{
-\item{m}{fitted \code{Hmsc}-class object}
+\item{mu}{CORAL-like matrix of means}
 
-\item{muList.coral}{arg2}
+\item{V}{CORAL-like matrix of flattened variances}
 
-\item{VList.coral}{arg3}
-}
-\value{
-list with combined means and covariance matrices
+\item{phyloTree}{phylogenetic tree covering all species}
+
+\item{spNames.common}{species names designated as common in CORAL analysis}
+
+\item{plotColumns}{vector of covariates' indices to be included to the plot}
+
+\item{quantile.support}{what lower and upper tails of species coefficients to visualize}
+
+\item{plotTree}{proportion of the plot canvas to use for the phylogenetic tree, 0 for no tree}
+
+\item{seed}{random seed used for jittering}
+
+\item{col.common}{a vector of two color strings indicating lower and upper tails among common species}
+
+\item{alpha.common}{transparency for common species}
+
+\item{jitter.common}{jitter amount for common species}
+
+\item{cex.common}{size of points for common species}
+
+\item{pch.common}{symbol type for common species}
+
+\item{col.rare}{a vector of two color strings indicating lower and upper tails among rare species}
+
+\item{alpha.rare}{transparency for rare species}
+
+\item{jitter.rare}{jitter amount for rare species}
+
+\item{cex.rare}{size of points for rare species}
+
+\item{pch.rare}{symbol type for rare species}
+
+\item{showCovNames}{whether to display covariate names in the plot}
 }
 \description{
-Plots summary of Beta coefficents fitted with CORAL approach
+Plots summary of Beta coefficients fitted with CORAL approach
 }

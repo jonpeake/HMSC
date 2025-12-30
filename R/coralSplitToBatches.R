@@ -10,7 +10,7 @@
 #' @return
 #' A named list of three elements \code{Y}, \code{TrData} and \code{C.common.rare},
 #' each of which is a list of length \code{batchN} with splits of the corresponding input argument
-#'#'
+#'
 #' @export
 
 coralSplitToBatches = function(Y, TrData, C.common.rare, batchN=1){

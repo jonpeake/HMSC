@@ -9,23 +9,27 @@ coralTrain(Y, XData, XFormula, prior.mu, prior.V, transient, samples, thin)
 \arguments{
 \item{Y}{covariates data.frame}
 
-\item{XData}{arg2}
+\item{XData}{a data frame of measured covariates for fixed effects, same as in the backbone \code{Hmsc(...)} constructor}
 
-\item{XFormula}{arg3}
+\item{XFormula}{a \code{\link{formula}}-class object for fixed effects}
 
-\item{prior.mu}{arg4}
+\item{prior.mu}{matrix of CORAL prior means}
 
-\item{prior.V}{arg5}
+\item{prior.V}{matrix of CORAL prior variances}
 
-\item{transient}{arg6}
+\item{transient}{number of transient MCMC steps}
 
-\item{samples}{arg7}
+\item{samples}{number of posterior MCMC samples}
 
-\item{thin}{arg8}
+\item{thin}{thinning interval for MCMC samples}
 }
 \value{
 list with means and covariance matrices of CORAL posteriors
 }
 \description{
 Trains CORAL models
+}
+\details{
+Arguments \code{transient}, \code{samples} and \code{thin} are passed to the \code{MCMCprobit(...)} call
+sequentially made for for each species.
 }

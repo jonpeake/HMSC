@@ -34,8 +34,8 @@
 #' @param marTree plotting margins for phylogenetic tree
 #' @param mgp can be used to set the location of the scale bar
 #' @param main main title for the plot.
-#' @param smallplot passed to \code{\link{image.plot}}
-#' @param bigplot passed to \code{\link{image.plot}}
+#' @param bigplot argument passed to \code{\link[fields]{image.plot}}, designates position of the heatmap
+#' @param smallplot argument passed to \code{\link[fields]{image.plot}}, designates position of the colorbar
 #' @param newplot set to  false if the plot will be part of multi-panel plot initialized with par(mfrow)
 #'
 #'
@@ -65,7 +65,7 @@ plotBeta = function(hM, post, param = "Support", plotTree = FALSE,
                     colors = colorRampPalette(c("blue","white","red")), colorLevels = NULL,
                     mar=NULL, marTree=c(6,0,2,0),mgp=c(3,2,0),
                     main = NULL,
-                    smallplot=NULL, bigplot=NULL,newplot=TRUE)
+                    bigplot=NULL, smallplot=NULL, newplot=TRUE)
 {
     ## Check that text arguments are acceptable, and expand to full
     ## names if abbreviated.

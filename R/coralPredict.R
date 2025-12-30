@@ -2,14 +2,14 @@
 #'
 #' @description Makes predictions from CORAL models
 #'
-#' @param XData covariates data.frame
-#' @param XFormula arg2
-#' @param mu arg3
-#' @param V arg4
-#' @param prob arg5
+#' @param XData dataframe of covariates for the sampling units to be predicted
+#' @param XFormula a \code{\link{formula}}-class object for fixed effects
+#' @param mu matrix of CORAL prior or posterior means
+#' @param V matrix of CORAL prior or posterior flattened variances
+#' @param prob whether to return predictions as probabilities (TRUE) or latent linear predictor (FALSE)
 #'
 #' @return
-#' Matrix of size ny x ns with CORAL predictions
+#' Matrix of CORAL predictions with predicted sampling units in the rows and species in the columns
 #'
 #' @export
 

@@ -1,6 +1,6 @@
 #' @title coralGetXDataExt
 #'
-#' @description constructs extended \code{XData} and \code{XFormula} from fitted \code{Hmsc} for consequent CORAL analysis
+#' @description Constructs extended \code{XData} and \code{XFormula} from fitted \code{Hmsc} for consequent CORAL analysis
 #'
 #' @param m fitted \code{Hmsc}-class object
 #' @param nf upper number of leading latent factors to be used in CORAL analysis per \code{HmscRandomLevel}
@@ -20,7 +20,7 @@
 #' By default the \code{nf} is set to infinity, resulting in selection of all estimated latent factors.
 #'
 #' For example, if \code{Hmsc} model has \code{XFormula="~X1+X2"} and 2 random levels \code{LF1, LF2}, with 3 and 4 latent factors extracted correspondingly,
-#' then the extended \code{XDataExt="~X1+X2 + LF1.1+LF1.2+LF1.3 + LF2.1+LF2.2+LF2.3+LF2.4}"
+#' then the extended \code{XDataExt="~X1+X2 + LF1.1+LF1.2+LF1.3 + LF2.1+LF2.2+LF2.3+LF2.4"}.
 #'
 #' @importFrom stats as.formula
 #'
@@ -50,7 +50,7 @@ coralGetXDataExt = function(m, nf=NULL, varProp=NULL){
    }
    if(length(nf) == 1) nf = rep(nf, m$nr)
 
-   mR2 = rowMeans(R2)
+   mR2 = rowMeans(R2, na.rm=TRUE)
    # plot(mR2, ylim=c(0,1))
    i = which.max(mR2) # isolate latent factor with highest explanatory power
    p = post[[i]]

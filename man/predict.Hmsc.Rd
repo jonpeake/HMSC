@@ -31,6 +31,9 @@
 \item{post}{a list of posterior samples of the HMSC model. By default uses all samples from the pooled
 posterior of the hM object.}
 
+\item{Loff}{offset matrix of the same dimensions as the prediction. Added to the predictions on the linear predictor scale.
+Same as in the \code{Hmsc} constructor, this is used to account to pre-defined differences between prediction units.}
+
 \item{XData}{a dataframe specifying the unpreprocessed covariates for the predictions to be made.
 Works only if the \code{XFormula} argument was specified in the \code{Hmsc()} model constructor call.
 Requirements are similar to those in the \code{Hmsc} model constructor.}

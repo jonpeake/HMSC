@@ -3,24 +3,24 @@
 #' @description Constructs CORAL priors
 #'
 #' @param m fitted \code{Hmsc}-class object
-#' @param spNames.rare arg2
-#' @param TrData.rare arg3
-#' @param phyloTree arg4
-#' @param C.common.rare arg5
-#' @param interceptVarInflation arg6
+#' @param spNames.rare vector of species names that are considered rare
+#' @param TrData.rare dataframe of traits for rare species, if non-trivial traits were used in the backbone Hmsc model
+#' @param phyloTree phylogeny tree covering both common and rare species
+#' @param C.common.rare part of phylogeny similarity matrix between common (columns) and rare (rows) species
+#' @param interceptVarInflation multiplier for conditional variance prior of intercept term in the CORAL prior,
+#' compared to phylogeny-induced conditional prior
 #'
 #' @return
-#' A list containing means and covariances of CORAL prior
+#' A list containing CORAL prior as matrix of means and matrix of flattened covariances
+#'
+#' @details
+#' The returned CORAL prior components are matrices with rows corresponding to the rare species from the \code{spNames.rare} argument.
 #'
 #' @importFrom ape vcv
 #'
 #' @export
 
 coralGetRareSpeciesPriors = function(m, spNames.rare, TrData.rare=NULL, phyloTree=NULL, C.common.rare=NULL, interceptVarInflation=5){
-   # requested input - fitted Hmsc backbone model and names of rare species
-   # additionally if Hmsc model was using traits, a corresponding TrData.rare must be given for rare species
-   # finally, if phylogeny given to Hmsc model does not cover the rare species, a joint phylogeny shall be provided
-
    #TODO We shall avoid construction of C explicitely, as it is HUGE and SLOW once the number of rare is large.
    # Best will be tweak the ape/phytools functionality somehow, but I am unaware of how that can be done.
    # Alternatively, we need to disentangle the phylogeny tree structure manually to get these common-rare correlations.
